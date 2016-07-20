@@ -20,8 +20,7 @@ function Get-LocalUser{
                    ValueFromPipeline=$true,
                    ValueFromPipelineByPropertyName=$true)]
         [String[]]$Name,
-        [Parameter(ValueFromPipeline=$true,
-                   ValueFromPipelineByPropertyName=$true)]
+        [Parameter(ValueFromPipelineByPropertyName=$true)]
         [String[]]$ComputerName=$env:COMPUTERNAME 
     )
     Process 
