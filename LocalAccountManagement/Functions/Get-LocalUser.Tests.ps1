@@ -16,20 +16,35 @@ function createUsers([String[]]$User)
 
 Describe "Get-LocalUser" {
     
-    Context "Pipeline input" {
-        $user1 = "test1"
-        $user2 = "test2"
+    $user1 = "test1"
+    $user2 = "test2"
+    $user3 = "test3"
+
+    Mock getAllUsers { createUsers -User $user1, $user2, $user3 }
     
-        Mock Where-Object { createUsers -User $user1, $user2 } -ParameterFilter { $FilterScript -eq "{ `$_.psbase.SchemaClassName -match 'user' }" }
-   
-        $result = 't*' | Get-LocalUser
+    Context "Via Pipeline" { 
+        $result = '*t*' | Get-LocalUser
     
         It "sldfjk" {
-            Assert-MockCalled Where-Object -Exactly 1 {} -ParameterFilter { $FilterScript -eq "{ `$_.psbase.SchemaClassName -match 'user' }" }
+            Assert-MockCalled getAllUsers -Exactly 1
         }
         It "returns correct user accounts" {
-            $result[0].name | should be $user1
-            $result[1].name | should be $user2
+            $users = $result | select -ExpandProperty name
+            $users.Contains($user1) | should be $true
+            $users.Contains($user2) | should be $true
+            $users.Contains($user3) | should be $true
+        }
+
+        It "Does not return duplicate accounts when wildcards are used" {
+            $result.Count | should be 3
+        }
+    }
+
+    Context "Via Paramaters" {
+        $result = Get-LocalUser "*t*", "*est*" 
+
+        It "Does not return duplicate accounts when wildcards are used" {
+            $result.Count | should be 5
         }
     }
     

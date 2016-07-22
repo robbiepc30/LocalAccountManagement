@@ -4,8 +4,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 Describe "t" {
     
-    $insideScriptBlock = '"A"'
-    $scriptBlock = [scriptblock]::Create($insideScriptBlock)
+    #$insideScriptBlock = '"A"'
+    #$scriptBlock = [scriptblock]::Create($insideScriptBlock)
 
     Mock Where-Object {"bb"} -ParameterFilter {$FilterScript -eq $($scriptBlock)} 
     Mock Write-Output {"bb"} -ParameterFilter {$InputObject -eq '{"a"}'} 
@@ -13,7 +13,7 @@ Describe "t" {
     t
     
     It "ran where-object mock" {
-        Assert-MockCalled Where-Object -Scope Describe -ParameterFilter {$FilterScript -eq $($scriptBlock)}   
+        Assert-MockCalled Where-Object -Scope Describe -ParameterFilter {[String]$FilterScript -eq '"A"'}   
     }
     
     It "ran write-output mock" {
