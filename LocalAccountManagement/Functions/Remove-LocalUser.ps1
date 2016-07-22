@@ -27,7 +27,7 @@ function Remove-LocalUser {
         if ($Force) {$ConfirmPreference = 'None'}
     }
     Process
-    { 
+    {
         foreach ($C in $ComputerName) #Do this for each computer in the $ComputerName collection
         {
             If ($psCmdlet.shouldProcess("$C", "Remove-LocalUser: Account(s): $Name"))
