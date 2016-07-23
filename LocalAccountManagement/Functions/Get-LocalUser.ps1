@@ -21,6 +21,9 @@
 .EXAMPLE
     '*admin*' | Get-LocalUser  
     Gets all users accounts ac from local computer that has the name "admin" anywhere in the user name
+.EXAMPLE
+    Get-LocalUser | Select *
+    Displays detailed information about local accounts
 #>
 function Get-LocalUser{
     [CmdletBinding()]
