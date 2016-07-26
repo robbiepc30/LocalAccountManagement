@@ -1,3 +1,27 @@
+<#
+.Synopsis
+   Updates settings on local user(s) on computer(s) 
+.DESCRIPTION
+   Updates settings on local user(s) on computer(s) 
+.EXAMPLE
+   Set-LocalUser -Name test1, test2 -Password 'SuperSecretPassword' -Description 'Test Accounts'
+   Updates password and description for accounts test1 and test2 on the local computer
+.EXAMPLE
+   Set-LocalUser -Name test1, test2  -ExpirePassword 
+   Forces password cahnge at next logon for accounts test1 and test2
+.EXAMPLE
+   Set-LocalUser -Name test1, test2  -Disable
+   Disables accounts test1 and test2
+.EXAMPLE
+    Import-CSV accounts.csv | Set-LocalUser -Password 'SuperSecretPassword' -Description 'Test Accounts'
+    Updates password and dicription for accounts and computers listed in the csv file
+.EXAMPLE
+    'test1', 'test2' | Set-LocalUser -Password SuperSecretPassword'
+    Updates the password for accounts test1 and test2 on the local computer
+.EXAMPLE
+    Set-LocalUser -Name 'test1', 'test2' -Computername 'Client01', 'Client02' -Enable
+    Enables accounts test1 and test2 on computers Client01 and Client02
+#>
 Function Set-LocalUser {
     [CmdletBinding(SupportsShouldProcess=$true,
                     confirmImpact='High')]

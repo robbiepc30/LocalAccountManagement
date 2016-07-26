@@ -64,6 +64,4 @@ Describe "Set-LocalUser" {
             Assert-MockCalled getUser -Exactly 1 -ParameterFilter { ($Name -eq $user2) -and ($ComputerName -eq $computer2) }
         }
     }
-
-
 }

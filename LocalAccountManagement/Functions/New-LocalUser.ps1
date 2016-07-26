@@ -15,9 +15,6 @@
 .EXAMPLE
    Import-Csv UserAccounts.csv | New-LocalUser -Password 'SuperSecretPassword' -Description 'Guest Accounts'
    Creates the users on all the computers listed in CSV file
-
-
-
 #>
 Function New-LocalUser {
     [CmdletBinding(SupportsShouldProcess=$true,
