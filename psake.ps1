@@ -4,9 +4,8 @@
 
 Task Analyze {
     #Invoke-ScriptAnalyzer -Path .\LocalAccountManagement -Recurse | Where -Property FileName  -NotLike "*.Tests.*"
-    $saResult = Invoke-ScriptAnalyzer -Path $Path `
-                                        -Severity Error, Warning `
-                                        -Recurse
+    $saResult = Invoke-ScriptAnalyzer -Path .\LocalAccountManagement -Recurse -Severity Error, Warning -ExcludeRule PSAvoidUsingPlainTextForPassword  | 
+                where { $_.ScriptName -NotLike "*.Tests.*" }
     if ($saResult ){
         $saResult
         Write-Error "One or more Script Analyzer errors/Warrnings where found.  Build cannot continue!"
@@ -20,11 +19,11 @@ Task Test {
     }
 }
 
-Task Default -depends Analyze
+Task Default -depends Analyze, Test
 
 # ToDo: Add -depends Test when Test Task is added
 Task Deploy -depends Analyze, Test {
-    Invoke-PSDeploy -Path $PSScriptRoot -Force -Verbose:$VerbosePreference
+    Invoke-PSDeploy -Path $PSScriptRoot -Tags Prod -Force -Verbose:$VerbosePreference
 }
 
 

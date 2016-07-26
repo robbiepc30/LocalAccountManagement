@@ -1,7 +1,7 @@
-﻿Deploy "Deploy AccountCreation To Dev Folder" {
+﻿Deploy "Deploy LocalAccountManagement To Dev Folder" {
     By FileSystem {
-        FromSource AccountCreation
-        To C:\PSDev\AccountCreation
+        FromSource LocalAccountManagement
+        To C:\PSDev\LocalAccountManagement
         WithOptions @{
             Mirror = $True
         }
@@ -9,10 +9,21 @@
     }
 }
 
-Deploy "Deploy AccountCreation To Production Folder" {
+Deploy "Deploy LocalAccountManagement To Local Module Folder" {
     By FileSystem {
-        FromSource AccountCreation
-        To "\\robocop\ScriptRepo\AccountCreation"
+        FromSource LocalAccountManagement
+        To "C:\Program Files\WindowsPowerShell\Modules\LocalAccountManagement"
+        WithOptions @{
+            Mirror = $True
+        }
+        Tagged Prod
+    }
+}
+
+Deploy "Deploy LocalAccountManagement To Production Folder" {
+    By FileSystem {
+        FromSource LocalAccountManagement
+        To "\\robocop\ScriptRepo\LocalAccountManagement"
         WithOptions @{
             Mirror = $True
         }

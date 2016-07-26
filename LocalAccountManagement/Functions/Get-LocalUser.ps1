@@ -22,7 +22,7 @@
     '*admin*' | Get-LocalUser  
     Gets all users accounts ac from local computer that has the name "admin" anywhere in the user name
 .EXAMPLE
-    Get-LocalUser | Select *
+    Get-LocalUser | Select -Property *
     Displays detailed information about local accounts
 #>
 function Get-LocalUser{
@@ -85,6 +85,7 @@ function Get-LocalUser{
                                                                      'objectSid'                  = $u.objectSid
                                                                      'ComputerName'               = $ca.ComputerName }
                     $Obj.PSObject.TypeNames.Insert(0,"RPC.LocalUser")   
+                    
                     # DO NOT REMOVE THIS!!! PREVENTS DUPLICATE ACCOUNTS FROM DISPLAYING WHEN USING -NAME PARAMATER AND USING WILDCARDS
                     # remove record from array list 
                     # If comptuer has multipe accounts that start with a "t", one called "testguest" and a user wanted to find all accounts that start with "t" and all
@@ -99,6 +100,7 @@ function Get-LocalUser{
     }
 }
 
+# refactored this to make it easier to Mock for Pester Unit test
 function getAllUsers ($ComputerName) {
     $objOu = [ADSI]"WinNT://$ComputerName"
     $allUsers = $objOu.psbase.Children | Where-Object { $_.psbase.SchemaClassName -match 'user' }
