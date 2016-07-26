@@ -110,6 +110,6 @@ function setUser ($UserObj) {
 }
 
 function setPassword ($UserObj, $Password) {
-    
+    $UserObj.setpassword($Password)
 }
 
