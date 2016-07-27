@@ -58,13 +58,13 @@ Function Set-LocalUser {
                     $user = getUser -Name $N -ComputerName $C # refactored for Pester Unit test
                 
                     if ($Password)
-                    {#If no password was entered it skips this step of changing the password
-                     Write-Verbose "Setting password for $N account on $C"
+                    {
+                        Write-Verbose "Setting password for $N account on $C"
                         setPassword -UserObj $user -Password $Password # Refactored for Pester test                
                     }
                 
                     if ($Description) 
-                    {# if no description was entered it skips this step
+                    {
                    	    Write-Verbose "Changing description for $N account on $C"
                    	    $user.description = $Description    
                     }
@@ -80,13 +80,13 @@ Function Set-LocalUser {
                     }
                 
                     if ($ExpirePassword)
-                    {#Checks to see -ChangePass paramater was used, if not it skips this step     
+                    {    
                         Write-Verbose "Password for $N set to expire on $C, user must change password at next logon"
                         $user.passwordExpired = 1 #Sets user expire at next logon 
                     }
                 
                     if ($UnExpirePassword)
-                    {#Checks to see if -NotChangePass paramater was used, if not it skips this step
+                    {
                         Write-Verbose "Password for $N set NOT to expire on $C for next logon"
                         $user.passwordExpired = 0 #Sets users password not to expire at next logon 
                     }

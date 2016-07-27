@@ -25,9 +25,6 @@ Describe "Get-LocalUser" {
     Context "Test via pipeline" { 
         $result = '*t*', '*est*' | Get-LocalUser
     
-        It "sldfjk" {
-            Assert-MockCalled getAllUsers -Exactly 1
-        }
         It "Returns correct user accounts" {
             $users = $result | select -ExpandProperty name
             $users.Contains($user1) | should be $true
