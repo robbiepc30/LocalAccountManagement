@@ -4,7 +4,7 @@
 
 Task Analyze {
     #Invoke-ScriptAnalyzer -Path .\LocalAccountManagement -Recurse | Where -Property FileName  -NotLike "*.Tests.*"
-    $saResult = Invoke-ScriptAnalyzer -Path .\LocalAccountManagement -Recurse -Severity Error, Warning -ExcludeRule PSAvoidUsingPlainTextForPassword, PSAvoidUsingUserNameAndPassWordParams  | 
+    $saResult = Invoke-ScriptAnalyzer -Path .\LocalAccountManagement -Recurse -Severity Error, Warning -ExcludeRule PSAvoidUsingPlainTextForPassword, PSAvoidUsingUserNameAndPassWordParams, PSAvoidUsingWMICmdlet  | 
                 where { $_.ScriptName -NotLike "*.Tests.*" }
     if ($saResult ){
         $saResult
