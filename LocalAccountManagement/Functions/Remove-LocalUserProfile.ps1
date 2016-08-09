@@ -34,7 +34,7 @@ Function Remove-LocalUserProfile {
     }
     Process
     { 
-        foreach($C in $ComputerName)
+        foreach ($C in $ComputerName)
         {
             If ($psCmdlet.shouldProcess($C, "Remove-LocalUserProfile: Account(s): $Name"))
             {
