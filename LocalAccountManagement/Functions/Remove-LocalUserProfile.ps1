@@ -14,7 +14,7 @@
    Get-LocalUser *test* | Remove-LocalUserProfile   
    Removes all users PROFILE from local computer with the name "test" anywhere in the username
 .EXAMPLE
-   Import-Csv UserAccounts.csv | Remove-LocalUser   
+   Import-Csv UserAccounts.csv | Remove-LocalUserProfile
    Removes all users PROFILE listed in the CSV on the Computers listed in the CSV file
 #>
 Function Remove-LocalUserProfile {

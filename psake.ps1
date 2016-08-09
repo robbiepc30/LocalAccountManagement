@@ -3,8 +3,7 @@
 }
 
 Task Analyze {
-    #Invoke-ScriptAnalyzer -Path .\LocalAccountManagement -Recurse | Where -Property FileName  -NotLike "*.Tests.*"
-    $saResult = Invoke-ScriptAnalyzer -Path .\LocalAccountManagement -Recurse -Severity Error, Warning -ExcludeRule PSAvoidUsingPlainTextForPassword, PSAvoidUsingUserNameAndPassWordParams, PSAvoidUsingWMICmdlet  | 
+    $saResult = Invoke-ScriptAnalyzer -Path $Path -Recurse -Severity Error, Warning -ExcludeRule PSAvoidUsingPlainTextForPassword, PSAvoidUsingUserNameAndPassWordParams, PSAvoidUsingWMICmdlet  | 
                 where { $_.ScriptName -NotLike "*.Tests.*" }
     if ($saResult ){
         $saResult
@@ -21,7 +20,6 @@ Task Test {
 
 Task Default -depends Analyze, Test
 
-# ToDo: Add -depends Test when Test Task is added
 Task Deploy -depends Analyze, Test {
     Invoke-PSDeploy -Path $PSScriptRoot -Tags Prod -Force -Verbose:$VerbosePreference
 }
