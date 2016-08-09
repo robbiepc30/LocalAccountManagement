@@ -60,7 +60,7 @@ Function Set-LocalUser {
                     if ($Password)
                     {
                         Write-Verbose "Setting password for $N account on $C"
-                        setPassword -UserObj $user -Password $Password # Refactored for Pester test                
+                        setPassword -UserObj $user -Secret $Password # Refactored for Pester test                
                     }
                 
                     if ($Description) 
@@ -109,7 +109,7 @@ function setUser ($UserObj) {
     $UserObj.SetInfo()
 }
 
-function setPassword ($UserObj, $Password) {
-    $UserObj.setpassword($Password)
+function setPassword ($UserObj, $Secret) {
+    $UserObj.setpassword($Secret)
 }
 
