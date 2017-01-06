@@ -15,4 +15,4 @@ Resolve-Path |
 Where-Object { -not ($_.ProviderPath.ToLower().Contains(".tests.")) } |
 ForEach-Object { . $_.ProviderPath }
 
-# Testing
+# Test
