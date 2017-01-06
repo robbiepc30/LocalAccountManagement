@@ -14,3 +14,5 @@ $moduleRoot = Split-Path -Path $MyInvocation.MyCommand.Path
 Resolve-Path |
 Where-Object { -not ($_.ProviderPath.ToLower().Contains(".tests.")) } |
 ForEach-Object { . $_.ProviderPath }
+
+# Testing adding git remote to bare repo
