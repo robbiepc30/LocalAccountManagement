@@ -1,3 +1,4 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/dfo55sfovqlo6juc/branch/master?svg=true)](https://ci.appveyor.com/project/RobbertCourtney/localaccountmanagement/branch/master)
 # LocalAccountManagement
 The LocalAccountManagement module allows you to manage "local" user accounts from PowerShell.  This allows you to get, set, add, and remove users from local and remote computers.  It also allows you to remove local user profiles on local and remote computers.
 
