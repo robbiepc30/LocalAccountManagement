@@ -12,7 +12,7 @@ build: false
 
 test_script:
 # Test with native PS version
-  - ps: Invoke-Pester
+  - ps: Invoke-Pester; exit;
 # Test with PS version 2
   - ps: powershell.exe -version 2.0 -executionpolicy bypass -noprofile -Command { Invoke-Pester }
 # Finalize pass - collect and upload results
